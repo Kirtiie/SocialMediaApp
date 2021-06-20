@@ -319,24 +319,27 @@ class _user_profileState extends State<user_profile> {
                                           .then((value) {
                                         FirebaseFirestore.instance
                                             .collection('Followers')
-                                            .doc(myemail)
-                                            .collection('followers')
                                             .doc(useremail)
+                                            .collection('followers')
+                                            .doc(myemail)
                                             .delete()
                                             .then((value) async {
-                                          var collectionRef = FirebaseFirestore
-                                              .instance
-                                              .collection('users');
-                                          var mydocu = await collectionRef
-                                              .doc(myemail)
-                                              .get();
-                                          var mydata = mydocu.data();
-                                          FirebaseFirestore.instance
-                                              .collection('Following')
-                                              .doc(useremail)
-                                              .collection('following')
-                                              .doc(myemail)
-                                              .delete();
+                                          // FirebaseFirestore.instance
+                                          //     .collection('Following')
+                                          //     .doc(useremail)
+                                          //     .collection('following')
+                                          //     .doc(myemail)
+                                          //     .delete();
+                                        }).then((value) {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          super.widget));
+                                        }).catchError((e) {
+                                          print('error deleting task');
+                                          print(e.toString());
                                         });
                                       });
                                       Navigator.pushReplacement(
@@ -508,59 +511,65 @@ class _user_profileState extends State<user_profile> {
                               ),
                             ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Container(
-                              padding: EdgeInsets.only(
-                                  left: 30, top: 35, bottom: 20),
-                              child: Text(
-                                'Photos',
-                                style: TextStyle(
-                                  color: theme_text,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20,
+                      checkFollowers
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                        left: 30, top: 35, bottom: 20),
+                                    child: Text(
+                                      'Photos',
+                                      style: TextStyle(
+                                        color: theme_text,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Container(
-                                padding: EdgeInsets.only(
-                                    right: 20, top: 35, bottom: 20),
-                                child: Icon(
-                                  Icons.more_vert,
-                                  color: theme_icon,
-                                )),
-                          )
-                        ],
-                      ),
-                      Container(
-                        height: 270,
-                        padding: EdgeInsets.all(8),
-                        child: GridView.builder(
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    childAspectRatio: 3 / 4,
-                                    crossAxisSpacing: 8,
-                                    mainAxisSpacing: 8),
-                            itemCount: 35,
-                            itemBuilder: (BuildContext ctx, index) {
-                              return Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                            "https://i.pinimg.com/originals/6d/62/f0/6d62f0fb9edea6121981088f95ef5e53.jpg")),
-                                    borderRadius: BorderRadius.circular(15)),
-                              );
-                            }),
-                      ),
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Container(
+                                      padding: EdgeInsets.only(
+                                          right: 20, top: 35, bottom: 20),
+                                      child: Icon(
+                                        Icons.more_vert,
+                                        color: theme_icon,
+                                      )),
+                                )
+                              ],
+                            )
+                          : Container(),
+                      // Container(
+                      //   height: 300,
+                      //   padding: EdgeInsets.all(8),
+                      //   child:
+                      checkFollowers
+                          ? GridView.builder(
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 3,
+                                      childAspectRatio: 3 / 4,
+                                      crossAxisSpacing: 8,
+                                      mainAxisSpacing: 8),
+                              itemCount: 35,
+                              itemBuilder: (BuildContext ctx, index) {
+                                return Container(
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              "https://i.pinimg.com/originals/6d/62/f0/6d62f0fb9edea6121981088f95ef5e53.jpg")),
+                                      borderRadius: BorderRadius.circular(15)),
+                                );
+                              })
+                          : Container(),
+                      // ),
                     ],
                   ),
                 ),
