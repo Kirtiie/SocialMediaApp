@@ -248,6 +248,7 @@ class _requestState extends State<request> {
                     'userimg': userimg,
                     'username': username,
                     'name': name,
+                    // 'photo': userimg,
                     'useremail': useremail
                   }).then((value) async {
                     var collectionRef =
@@ -265,6 +266,7 @@ class _requestState extends State<request> {
                       'photo': mydata['photo'],
                       'username': mydata['username'],
                       'name': mydata['name'],
+                      // 'photo': mydata['photo'],
                       'useremail': mydata['email'],
                     });
                   });

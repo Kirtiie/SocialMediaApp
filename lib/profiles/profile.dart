@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socialmedia/Authentication/splash.dart';
+import 'package:socialmedia/FollowersAndFollowing/Followers.dart';
+import 'package:socialmedia/FollowersAndFollowing/Following.dart';
 import 'package:socialmedia/settings/theme.dart';
 
 class profile extends StatefulWidget {
@@ -29,7 +31,7 @@ class _profileState extends State<profile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
+    getFollowersFollowing();
     // Timer timer = Timer.periodic(Duration(milliseconds: 900), (Timer t) {
     //   setState(() {});
     // });
@@ -60,6 +62,7 @@ class _profileState extends State<profile> {
     followingcount = qsnap2.docs.length;
     print(email);
     print(followingcount);
+    setState(() {});
   }
 
   @override
@@ -316,90 +319,109 @@ class _profileState extends State<profile> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(top: 20),
-                                child: Text(
-                                  '$followingcount',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                    color: theme_text,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Following()));
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: Text(
+                                    '$followingcount',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 20,
+                                      color: theme_text,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(top: 5),
-                                child: Text(
-                                  'Following',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 15,
-                                    color: Colors.grey[500],
+                                Container(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    'Following',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15,
+                                      color: Colors.grey[500],
+                                    ),
                                   ),
-                                ),
-                              )
-                            ],
+                                )
+                              ],
+                            ),
                           ),
                           SizedBox(
                             width: 25,
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(top: 20),
-                                child: Text(
-                                  '$followercount',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                    color: theme_text,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Followers()));
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: Text(
+                                    '$followercount',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 20,
+                                      color: theme_text,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(top: 5),
-                                child: Text(
-                                  'Followers',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15,
-                                      color: Colors.grey[500]),
-                                ),
-                              )
-                            ],
+                                Container(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    'Followers',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
+                                        color: Colors.grey[500]),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                           SizedBox(
                             width: 25,
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.only(top: 20),
-                                child: Text(
-                                  '25',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 20,
-                                    color: theme_text,
+                          GestureDetector(
+                            onTap: () {},
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(top: 20),
+                                  child: Text(
+                                    '25',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 20,
+                                      color: theme_text,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(top: 5),
-                                child: Text(
-                                  'Post',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15,
-                                      color: Colors.grey[500]),
-                                ),
-                              )
-                            ],
+                                Container(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    'Post',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
+                                        color: Colors.grey[500]),
+                                  ),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
