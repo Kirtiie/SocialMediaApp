@@ -295,13 +295,33 @@ class _user_profileState extends State<user_profile> {
                                           .doc(myemail)
                                           .delete()
                                           .then((value) {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        super.widget));
+                                        FirebaseFirestore.instance
+                                            .collection('Followers')
+                                            .doc(myemail)
+                                            .collection('followers')
+                                            .doc(useremail)
+                                            .delete()
+                                            .then((value) async {
+                                          var collectionRef = FirebaseFirestore
+                                              .instance
+                                              .collection('users');
+                                          var mydocu = await collectionRef
+                                              .doc(myemail)
+                                              .get();
+                                          var mydata = mydocu.data();
+                                          FirebaseFirestore.instance
+                                              .collection('Following')
+                                              .doc(useremail)
+                                              .collection('following')
+                                              .doc(myemail)
+                                              .delete();
+                                        });
                                       });
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  super.widget));
                                     },
                                     child: Container(
                                       margin: EdgeInsets.only(top: 20),
