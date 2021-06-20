@@ -71,40 +71,43 @@ class NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
+    onWillPop() {}
     // var provider = Provider.of<ProviderData>(context);
-    return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.indigo[900],
-      // ),
-      body: buildPageView(),
-      bottomNavigationBar: CurvedNavigationBar(
-        color: theme_navigation,
-        backgroundColor: theme_main,
-        buttonBackgroundColor: theme_navigation,
-        index: bottomSelectedIndex,
-        items: [
-          Icon(
-            Icons.home,
-            color: theme_icon,
+    return WillPopScope(
+        child: Scaffold(
+          // appBar: AppBar(
+          //   backgroundColor: Colors.indigo[900],
+          // ),
+          body: buildPageView(),
+          bottomNavigationBar: CurvedNavigationBar(
+            color: theme_navigation,
+            backgroundColor: theme_main,
+            buttonBackgroundColor: theme_navigation,
+            index: bottomSelectedIndex,
+            items: [
+              Icon(
+                Icons.home,
+                color: theme_icon,
+              ),
+              Icon(
+                Icons.shop_two,
+                color: theme_icon,
+              ),
+              Icon(
+                Icons.person_add,
+                color: theme_icon,
+              ),
+              Icon(
+                Icons.account_circle,
+                color: theme_icon,
+              )
+            ],
+            onTap: (index) {
+              bottomTapped(index);
+            },
           ),
-          Icon(
-            Icons.shop_two,
-            color: theme_icon,
-          ),
-          Icon(
-            Icons.person_add,
-            color: theme_icon,
-          ),
-          Icon(
-            Icons.account_circle,
-            color: theme_icon,
-          )
-        ],
-        onTap: (index) {
-          bottomTapped(index);
-        },
-      ),
-    );
+        ),
+        onWillPop: onWillPop);
   }
 
   App_theme() async {

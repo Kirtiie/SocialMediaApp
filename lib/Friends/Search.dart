@@ -118,7 +118,7 @@ class _SearchState extends State<Search> {
         ? StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("users")
-                .where('username',
+                .where('searchname',
                     isGreaterThanOrEqualTo:
                         _searchController.text.toLowerCase())
                 .snapshots(),

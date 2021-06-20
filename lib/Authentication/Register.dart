@@ -282,6 +282,7 @@ class _registerState extends State<register> {
                       'extra1': 'abc',
                       'val': 'value',
                       'checkval': 'value',
+                      'searchname': nameCont.text.toLowerCase(),
                       'lat': lat == null ? 34.0479 : lat,
                       'lng': lng == null ? 100.6197 : lng,
                       'address': Add == null || Add == '' ? 'Address' : Add

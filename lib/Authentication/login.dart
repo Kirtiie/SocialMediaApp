@@ -126,6 +126,7 @@ class _loginState extends State<login> {
                     prefs.setString('email', emailCont.text);
                     prefs.setString('pass', passCont.text);
                     prefs.setBool('theme', true);
+                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
