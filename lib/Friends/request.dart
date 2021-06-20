@@ -227,7 +227,7 @@ class _requestState extends State<request> {
                 print("Accepted");
                 print(useremail);
                 print(myemail);
-                print("Rejected");
+
                 FirebaseFirestore.instance
                     .collection('Request')
                     .doc(myemail)
@@ -236,7 +236,37 @@ class _requestState extends State<request> {
                     .update({'accepted': 1})
                     // .delete()
                     .then((value) {
-                  print('Deleted Successfully');
+                  FirebaseFirestore.instance
+                      .collection('Followers')
+                      .doc(myemail)
+                      .collection('followers')
+                      .doc(useremail)
+                      .set({
+                    'useremail': useremail,
+                    'myemail': myemail,
+                    'userimg': userimg,
+                    'username': username,
+                    'name': name,
+                    'useremail': useremail
+                  }).then((value) async {
+                    var collectionRef =
+                        FirebaseFirestore.instance.collection('users');
+                    var mydocu = await collectionRef.doc(myemail).get();
+                    var mydata = mydocu.data();
+                    FirebaseFirestore.instance
+                        .collection('Following')
+                        .doc(useremail)
+                        .collection('following')
+                        .doc(myemail)
+                        .set({
+                      'useremail': myemail,
+                      'myemail': useremail,
+                      'photo': mydata['photo'],
+                      'username': mydata['username'],
+                      'name': mydata['name'],
+                      'useremail': mydata['email'],
+                    });
+                  });
                 }).catchError((e) {
                   print('error deleting');
                 });
