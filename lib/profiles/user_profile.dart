@@ -24,11 +24,38 @@ class _user_profileState extends State<user_profile> {
   bool a = true;
   bool check = false;
   var checkFollowers = false;
+  var followercount = 0;
+  var followingcount = 0;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    getFollowersFollowing();
     App_theme();
+  }
+
+  getFollowersFollowing() async {
+    print(useremail);
+
+    var qsnap = await FirebaseFirestore.instance
+        .collection('Followers')
+        .doc(useremail)
+        .collection('followers')
+        .get();
+    followercount = qsnap.docs.length;
+    print(useremail);
+    print(followercount);
+    print('xxxxxxxxxxxxxxxxxxxxx');
+    var qsnap2 = await FirebaseFirestore.instance
+        .collection('Following')
+        .doc(useremail)
+        .collection('following')
+        .get();
+    followingcount = qsnap2.docs.length;
+    print(useremail);
+    print(followingcount);
+    print('xxxxxxxxxxxxxxxxxxxxx');
+    setState(() {});
   }
 
   checkFollowersUser() async {
@@ -212,7 +239,7 @@ class _user_profileState extends State<user_profile> {
                                 Container(
                                   padding: EdgeInsets.only(top: 20),
                                   child: Text(
-                                    '202',
+                                    '$followingcount',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20,
@@ -242,7 +269,7 @@ class _user_profileState extends State<user_profile> {
                                 Container(
                                   padding: EdgeInsets.only(top: 20),
                                   child: Text(
-                                    '290',
+                                    '$followercount',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       fontSize: 20,
