@@ -23,11 +23,33 @@ class _user_profileState extends State<user_profile> {
   // bool a = false;
   bool a = true;
   bool check = false;
+  var checkFollowers = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     App_theme();
+  }
+
+  checkFollowersUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var myMail = prefs.getString('email');
+    print(useremail);
+    print(myMail);
+    var checkdatafollowers = await FirebaseFirestore.instance
+        .collection('Followers')
+        .doc(useremail)
+        .collection('followers')
+        .doc(myMail)
+        .get();
+    setState(() {
+      checkFollowers = checkdatafollowers.exists;
+    });
+    if (checkFollowers) {
+      print('it exist ra');
+    } else {
+      print('it dosent exist ra');
+    }
   }
 
   checkreq() async {
@@ -429,60 +451,63 @@ class _user_profileState extends State<user_profile> {
                           ),
                         ),
                       ),
+                      checkFollowers
+                          ? Container()
+                          : Center(
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Container(
+                                      margin: EdgeInsets.only(top: 20),
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(50),
+                                        ),
+                                        color: Colors.grey[500],
+                                      ),
+                                      child: Icon(
+                                        Icons.lock,
+                                        size: 30,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      margin: EdgeInsets.only(top: 15),
+                                      child: Text(
+                                        'This Account is Private',
+                                        style: TextStyle(
+                                          color: theme_text,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Center(
+                                    child: Container(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 40),
+                                      margin: EdgeInsets.only(top: 12),
+                                      child: Text(
+                                        'Follow this Account to see their photos and videos.',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Colors.grey[500],
+                                          letterSpacing: 0.5,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
 
-                      Center(
-                        child: Column(
-                          children: [
-                            Center(
-                              child: Container(
-                                margin: EdgeInsets.only(top: 20),
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(50),
-                                  ),
-                                  color: Colors.grey[500],
-                                ),
-                                child: Icon(
-                                  Icons.lock,
-                                  size: 30,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Container(
-                                margin: EdgeInsets.only(top: 15),
-                                child: Text(
-                                  'This Account is Private',
-                                  style: TextStyle(
-                                    color: theme_text,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 40),
-                                margin: EdgeInsets.only(top: 12),
-                                child: Text(
-                                  'Follow this Account to see their photos and videos.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.grey[500],
-                                    letterSpacing: 0.5,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -548,6 +573,7 @@ class _user_profileState extends State<user_profile> {
   }
 
   App_theme() async {
+    checkFollowersUser();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // prefs.setString('name', nameCont.text);
 

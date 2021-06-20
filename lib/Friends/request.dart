@@ -57,12 +57,13 @@ class _requestState extends State<request> {
                 // margin: EdgeInsets.only(top: 20),
                 height: 35,
                 width: 35,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(200)),
-                    image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://i.pinimg.com/originals/6d/62/f0/6d62f0fb9edea6121981088f95ef5e53.jpg'))),
+                child: Icon(Icons.search_sharp, color: theme_icon),
+                // decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.all(Radius.circular(200)),
+                //     image: DecorationImage(
+                //         fit: BoxFit.cover,
+                //         image: NetworkImage(
+                //             'https://i.pinimg.com/originals/6d/62/f0/6d62f0fb9edea6121981088f95ef5e53.jpg'))),
               ),
             ),
           ),
