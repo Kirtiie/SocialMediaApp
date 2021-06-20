@@ -324,12 +324,12 @@ class _user_profileState extends State<user_profile> {
                                             .doc(myemail)
                                             .delete()
                                             .then((value) async {
-                                          // FirebaseFirestore.instance
-                                          //     .collection('Following')
-                                          //     .doc(useremail)
-                                          //     .collection('following')
-                                          //     .doc(myemail)
-                                          //     .delete();
+                                          FirebaseFirestore.instance
+                                              .collection('Following')
+                                              .doc(myemail)
+                                              .collection('following')
+                                              .doc(useremail)
+                                              .delete();
                                         }).then((value) {
                                           Navigator.pushReplacement(
                                               context,
