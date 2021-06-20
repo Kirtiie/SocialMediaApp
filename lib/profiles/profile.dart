@@ -429,28 +429,30 @@ class _profileState extends State<profile> {
                   )
                 ],
               ),
-              Container(
-                height: 270,
-                padding: EdgeInsets.all(8),
-                child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        childAspectRatio: 3 / 4,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8),
-                    itemCount: 35,
-                    itemBuilder: (BuildContext ctx, index) {
-                      return Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    "https://i.pinimg.com/originals/6d/62/f0/6d62f0fb9edea6121981088f95ef5e53.jpg")),
-                            borderRadius: BorderRadius.circular(15)),
-                      );
-                    }),
-              ),
+              // Container(
+              //   height: 270,
+              //   padding: EdgeInsets.all(8),
+              // child:
+              GridView.builder(
+                  shrinkWrap: true,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 3 / 4,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8),
+                  itemCount: 35,
+                  itemBuilder: (BuildContext ctx, index) {
+                    return Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  "https://i.pinimg.com/originals/6d/62/f0/6d62f0fb9edea6121981088f95ef5e53.jpg")),
+                          borderRadius: BorderRadius.circular(15)),
+                    );
+                  }),
+              // ),
             ],
           ),
         ),
