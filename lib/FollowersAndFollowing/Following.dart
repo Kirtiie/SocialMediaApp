@@ -58,7 +58,7 @@ class _FollowingState extends State<Following> {
                 shrinkWrap: true,
                 children: snapshot.data.docs.map<Widget>((document) {
                   return FriendList(document['photo'], document['username'],
-                      document['name'], document['email']);
+                      document['name'], document['useremail']);
                 }).toList(),
               );
             }

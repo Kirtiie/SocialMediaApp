@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:socialmedia/FollowersAndFollowing/Followers.dart';
 
 class user_profile extends StatefulWidget {
   // const user_profile({ Key? key }) : super(key: key);
@@ -345,18 +346,20 @@ class _user_profileState extends State<user_profile> {
                                           .delete()
                                           .then((value) {
                                         FirebaseFirestore.instance
+                                            .collection('Following')
+                                            .doc(myemail)
+                                            .collection('following')
+                                            .doc(useremail)
+                                            .delete();
+                                        FirebaseFirestore.instance
                                             .collection('Followers')
                                             .doc(useremail)
                                             .collection('followers')
                                             .doc(myemail)
                                             .delete()
                                             .then((value) async {
-                                          FirebaseFirestore.instance
-                                              .collection('Following')
-                                              .doc(myemail)
-                                              .collection('following')
-                                              .doc(useremail)
-                                              .delete();
+                                          print(
+                                              'Followers Removed from user Account');
                                         }).then((value) {
                                           Navigator.pushReplacement(
                                               context,
